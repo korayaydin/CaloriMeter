@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import java.util.List;
 
 import calorimeter.kraydn.com.calorimeter.R;
 
 /**
- * Created by Koray on 6.1.2015.
+ * Created by Koray on 6.10.2014.
  */
 public class OrderAdapter extends BaseAdapter {
     private Context context;
@@ -40,10 +43,12 @@ public class OrderAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //View view = ((LayoutInflater) (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(R.layout.order_item_layout, null);;
         View view = LayoutInflater.from(context).inflate(R.layout.order_item_layout, null);
 
-        CheckBox cbOrder = (CheckBox)view.findViewById(R.id.cbOrder);
+        CheckedTextView cbOrder = (CheckedTextView)view.findViewById(R.id.cbOrder);
         cbOrder.setSelected(listProduct.get(position).isSelected());
+
         cbOrder.setText(listProduct.get(position).getName());
 
         return view;

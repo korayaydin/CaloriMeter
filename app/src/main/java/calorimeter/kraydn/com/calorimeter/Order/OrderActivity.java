@@ -2,6 +2,7 @@ package calorimeter.kraydn.com.calorimeter.Order;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ public class OrderActivity extends Activity {
     CheckBox pizza,coffee,burger;
     Button buttonOrder;
     ListView lvProduct;
+    List<OrderItem> listProduct;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class OrderActivity extends Activity {
         setContentView(R.layout.activity_start);
         //addListenerOnButtonClick();
         initAll();
+        initListener();
         loadOrder();
     }
 
@@ -30,17 +33,62 @@ public class OrderActivity extends Activity {
         //Getting instance of CheckBoxes and Button from the activty_main.xml file
         buttonOrder=(Button)findViewById(R.id.button1);
         lvProduct = (ListView) findViewById(R.id.lvProduct);
+        listProduct = new ArrayList<>();
+    }
+
+    private void initListener(){
+
+//        lvProduct.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(OrderActivity.this,"TIKLANDI",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                Toast.makeText(OrderActivity.this,listProduct.get(i).getName(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+        lvProduct.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                Toast.makeText(OrderActivity.this,listProduct.get(i).getName(),Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        buttonOrder.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SparseBooleanArray arr = lvProduct.getCheckedItemPositions();
+
+                List<String> listResult = new ArrayList<>();
+                for (int i = 0; i < arr.size(); i++) {
+                    int pos = arr.keyAt(i);
+                    listResult.add(listProduct.get(pos).getName());
+                }
+
+                Toast.makeText(OrderActivity.this, listResult.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void loadOrder(){
-        List<OrderItem> list = new ArrayList<>();
+        listProduct.add(new OrderItem(false,"Pizza"));
+        listProduct.add(new OrderItem(false,"Water"));
+        listProduct.add(new OrderItem(false,"Çay"));
 
-        list.add(new OrderItem(false,"Pizza"));
-        list.add(new OrderItem(false,"Water"));
-        list.add(new OrderItem(false,"Çay"));
-
-        lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,list));
-    }
+        lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,listProduct));
+     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
