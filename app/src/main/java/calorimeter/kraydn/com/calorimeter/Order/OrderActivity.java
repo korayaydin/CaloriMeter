@@ -71,13 +71,16 @@ public class OrderActivity extends Activity {
             public void onClick(View v) {
                 SparseBooleanArray arr = lvProduct.getCheckedItemPositions();
 
-                List<String> listResult = new ArrayList<>();
-                for (int i = 0; i < arr.size(); i++) {
-                    int pos = arr.keyAt(i);
-                    listResult.add(listProduct.get(pos).getName());
+                List<String> list = new ArrayList<>();
+                for (int i = 0; i < listProduct.size(); i++) {
+
+                    if(listProduct.get(i).isSelected()){
+                        list.add(listProduct.get(i).getName());
+                    }
+
                 }
 
-                Toast.makeText(OrderActivity.this, listResult.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderActivity.this, list.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -86,7 +89,7 @@ public class OrderActivity extends Activity {
         listProduct.add(new OrderItem(false,"Pizza"));
         listProduct.add(new OrderItem(false,"Water"));
         listProduct.add(new OrderItem(false,"Çay"));
-
+        lvProduct.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,listProduct));
      }
 

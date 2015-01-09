@@ -42,14 +42,34 @@ public class OrderAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         //View view = ((LayoutInflater) (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))).inflate(R.layout.order_item_layout, null);;
-        View view = LayoutInflater.from(context).inflate(R.layout.order_item_layout, null);
+        final View view = LayoutInflater.from(context).inflate(R.layout.order_item_layout, null);
+        //View view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_multiple_choice,null);
 
-        CheckedTextView cbOrder = (CheckedTextView)view.findViewById(R.id.cbOrder);
+        final CheckedTextView cbOrder = (CheckedTextView)view.findViewById(R.id.cbOrder);
         cbOrder.setSelected(listProduct.get(position).isSelected());
-
         cbOrder.setText(listProduct.get(position).getName());
+
+        cbOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cbOrder.isChecked()){
+                    //uncheck yap
+                    cbOrder.setChecked(false);
+                    listProduct.get(position).setSelected(false);
+                    view.setBackgroundColor(context.getResources().getColor(R.color.accent_material_light));
+                }
+                else{
+                    //check yap
+                    cbOrder.setChecked(true);
+                    listProduct.get(position).setSelected(true);
+                    view.setBackgroundColor(context.getResources().getColor(R.color.accent_material_dark));
+                }
+            }
+        });
+
+        // cbOrder.setText(listProduct.get(position).getName());
 
         return view;
     }
