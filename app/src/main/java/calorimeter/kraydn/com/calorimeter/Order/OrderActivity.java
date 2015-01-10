@@ -87,8 +87,9 @@ public class OrderActivity extends Activity {
 
     private void loadOrder(){
         listProduct.add(new OrderItem(false,"Pizza"));
-        listProduct.add(new OrderItem(false,"Water"));
-        listProduct.add(new OrderItem(false,"Çay"));
+        listProduct.add(new OrderItem(false,"Burger"));
+        listProduct.add(new OrderItem(false,"Coffee"));
+
         lvProduct.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,listProduct));
      }

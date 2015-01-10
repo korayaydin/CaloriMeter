@@ -26,6 +26,6 @@ public class MainActivity extends ActionBarActivity {
                 Intent intent = new Intent(MainActivity.this, OrderActivity.class);
                 startActivity(intent);
             }
-        },500);
+        },1500);
     }
 }

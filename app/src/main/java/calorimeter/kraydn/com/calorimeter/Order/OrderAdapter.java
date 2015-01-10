@@ -58,7 +58,8 @@ public class OrderAdapter extends BaseAdapter {
                     //uncheck yap
                     cbOrder.setChecked(false);
                     listProduct.get(position).setSelected(false);
-                    view.setBackgroundColor(context.getResources().getColor(R.color.accent_material_light));
+                    view.setBackgroundColor(context.getResources().getColor(R.color.button_material_light));
+
                 }
                 else{
                     //check yap
@@ -73,4 +74,6 @@ public class OrderAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 }

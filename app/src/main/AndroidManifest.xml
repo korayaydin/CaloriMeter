@@ -20,6 +20,14 @@
             android:name=".Order.OrderActivity"
             android:label="@string/title_activity_start" >
         </activity>
+        <activity
+            android:name=".IndexActivity"
+            android:label="@string/title_activity_index" >
+        </activity>
+        <activity
+            android:name=".indexPage"
+            android:label="@string/title_activity_index_page" >
+        </activity>
     </application>
 
 </manifest>
