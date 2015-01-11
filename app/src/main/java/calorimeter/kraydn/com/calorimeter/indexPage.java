@@ -1,9 +1,18 @@
 package calorimeter.kraydn.com.calorimeter;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import calorimeter.kraydn.com.calorimeter.Order.OrderActivity;
 
 
 public class indexPage extends ActionBarActivity {
@@ -12,6 +21,16 @@ public class indexPage extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index_page);
+        Button T=(Button)findViewById(R.id.button);
+        T.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent i=new Intent(getApplicationContext(),OrderActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
 
@@ -36,4 +55,5 @@ public class indexPage extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

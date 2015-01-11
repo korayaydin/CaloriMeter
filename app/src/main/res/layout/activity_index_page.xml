@@ -4,14 +4,43 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="calorimeter.kraydn.com.calorimeter.indexPage">
+    tools:context="calorimeter.kraydn.com.calorimeter.indexPage"
+    android:background="@color/button_material_light">
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nedir?"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@style/Base.TextAppearance.AppCompat.Display3"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bir hafta boyunca her gün 1100 kalori daha az alındığında haftada 1 kilo verilir.
+        Fakat günlük 1200 kaloriden daha az kalori almak önerilmemektedir.
+        Çünkü organlarımızın da çalışması için; alınması gereken enerji buna çok yakındır.
+
+        Sizde sağılığınızı düşünüp, form düzeyinizi korumak istiyorsanız; kendinizi takibe alın!"
+        android:id="@+id/textView2"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        style="@style/AppTheme" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uygulamaya Git"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        style="@style/TextAppearance.AppCompat" />
 </RelativeLayout>

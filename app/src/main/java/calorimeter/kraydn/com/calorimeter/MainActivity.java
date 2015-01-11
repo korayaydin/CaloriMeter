@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, OrderActivity.class);
+                Intent intent = new Intent(MainActivity.this, indexPage.class);
                 startActivity(intent);
             }
         },1500);
