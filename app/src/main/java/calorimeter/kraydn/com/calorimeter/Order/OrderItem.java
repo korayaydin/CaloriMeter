@@ -10,6 +10,7 @@ public class OrderItem {
     public OrderItem(boolean isSelected, String name){
         this.isSelected = isSelected;
         this.name = name;
+
     }
 
     public boolean isSelected() {
