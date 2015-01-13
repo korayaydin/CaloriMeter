@@ -8,8 +8,6 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import calorimeter.kraydn.com.calorimeter.Order.OrderActivity;
-
 
 public class MainActivity extends ActionBarActivity {
 
@@ -23,9 +21,9 @@ public class MainActivity extends ActionBarActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, indexPage.class);
+                Intent intent = new Intent(MainActivity.this, IndexActivity.class);
                 startActivity(intent);
             }
-        },1500);
+        },3500);
     }
 }

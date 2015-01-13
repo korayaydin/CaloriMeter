@@ -15,7 +15,7 @@ import java.util.TimerTask;
 import calorimeter.kraydn.com.calorimeter.Order.OrderActivity;
 
 
-public class indexPage extends ActionBarActivity {
+public class IndexActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

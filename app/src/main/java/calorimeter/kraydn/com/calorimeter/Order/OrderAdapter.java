@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class OrderAdapter extends BaseAdapter {
                     cbOrder.setChecked(true);
                     listProduct.get(position).setSelected(true);
                     view.setBackgroundColor(context.getResources().getColor(R.color.accent_material_dark));
+                    Toast.makeText(context, listProduct.get(position).getValue() + " cal", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,5 +1,7 @@
 package calorimeter.kraydn.com.calorimeter.Order;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.SparseBooleanArray;
@@ -69,26 +71,45 @@ public class OrderActivity extends Activity {
         buttonOrder.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                SparseBooleanArray arr = lvProduct.getCheckedItemPositions();
+                String result = "";
 
-                List<String> list = new ArrayList<>();
+                int total = 0;
                 for (int i = 0; i < listProduct.size(); i++) {
-
                     if(listProduct.get(i).isSelected()){
-                        list.add(listProduct.get(i).getName());
+                        result = result.concat(listProduct.get(i).getName() + " " +listProduct.get(i).getValue() +  " CAL\n");
+                        total += listProduct.get(i).getValue();
                     }
-
                 }
+                result = result.concat("\nTotal: " + total + " CAL");
 
-                Toast.makeText(OrderActivity.this, list.toString(), Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
+                builder.setMessage("Your result is: \n\n"+result);
+                builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dlg = builder.create();
+                dlg.show();
+
+                //Toast.makeText(OrderActivity.this, list.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void loadOrder(){
-        listProduct.add(new OrderItem(false,"Pizza"));
-        listProduct.add(new OrderItem(false,"Burger"));
-        listProduct.add(new OrderItem(false,"Coffee"));
+        listProduct.add(new OrderItem(false,"Pizza", 120));
+        listProduct.add(new OrderItem(false,"Burger", 50));
+        listProduct.add(new OrderItem(false,"Coffee", 20));
+        listProduct.add(new OrderItem(false,"Gencer", 0));
 
         lvProduct.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,listProduct));
