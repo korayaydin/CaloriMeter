@@ -2,13 +2,21 @@ package calorimeter.kraydn.com.calorimeter.Order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +28,26 @@ public class OrderActivity extends Activity {
     Button buttonOrder;
     ListView lvProduct;
     List<OrderItem> listProduct;
+
+    private class UpdateSettings extends AsyncTask<String, Void, HttpResponse>{
+        @Override
+        protected HttpResponse doInBackground(String... params) {
+            HttpResponse response = null;
+            HttpGet httpget = new HttpGet(params[0]);
+
+            try {
+                HttpClient client = new DefaultHttpClient();
+                response = client.execute(httpget);
+
+                ;
+
+            }
+            catch (Exception ex){
+            }
+
+            return response;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +102,16 @@ public class OrderActivity extends Activity {
                 String result = "";
 
                 int total = 0;
+                String pref = "";
                 for (int i = 0; i < listProduct.size(); i++) {
                     if(listProduct.get(i).isSelected()){
                         result = result.concat(listProduct.get(i).getName() + " " +listProduct.get(i).getValue() +  " CAL\n");
                         total += listProduct.get(i).getValue();
+                        pref += i;
                     }
                 }
+
+                final String finalPref = pref;
                 result = result.concat("\nTotal: " + total + " CAL");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
@@ -88,6 +120,9 @@ public class OrderActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
+                        UpdateSettings settings = new UpdateSettings();
+                        settings.execute("http://calorimeter.host22.com/?secret=dambil&msg="+finalPref);
                     }
                 });
                 builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
@@ -106,13 +141,42 @@ public class OrderActivity extends Activity {
     }
 
     private void loadOrder(){
-        listProduct.add(new OrderItem(false,"Pizza", 120));
-        listProduct.add(new OrderItem(false,"Burger", 50));
-        listProduct.add(new OrderItem(false,"Coffee", 20));
-        listProduct.add(new OrderItem(false,"Gencer", 0));
+        listProduct.add(new OrderItem(false,"A slice of BREAD", 90));
+        listProduct.add(new OrderItem(false,"Croissant", 200));
+        listProduct.add(new OrderItem(false,"Biscuit", 470));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Steak(100g)", 278));
+        listProduct.add(new OrderItem(false,"Chicken(100g)", 132));
+        listProduct.add(new OrderItem(false,"Egg", 158));
+        listProduct.add(new OrderItem(false,"Bean", 340));
+        listProduct.add(new OrderItem(false,"Milk", 61));
+        listProduct.add(new OrderItem(false,"Cacao", 91));
+        listProduct.add(new OrderItem(false,"Cola", 149));
+        listProduct.add(new OrderItem(false,"Orange Juice", 45));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
+        listProduct.add(new OrderItem(false,"Pasta", 85));
 
         lvProduct.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lvProduct.setAdapter(new OrderAdapter(OrderActivity.this,listProduct));
+
+        UpdateSettings settings = new UpdateSettings();
+        settings.execute("http://calorimeter.host22.com/?secret=dambil");
      }
 
     @Override
